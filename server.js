@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose'); //importa el ODM
 const session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+const cors = require('cors'); //darle permisos al que front traiga data
+const passport = require('passport');
 
 const app = express(); //incializa express
 mongoose.Promise = global.Promise;
@@ -19,13 +21,21 @@ mongoose.connect('mongodb://ale:abc123@ds133876.mlab.com:33876/eventro3', (err, 
     console.log('BASE DE DATOS: \x1b[32m%s\x1b[0m', 'ONLINE');
 });
 
+app.use(cors());
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header('Access-Control-Allow-Methods', 'GET', 'POST', 'DELETE', 'PUT');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 //inicializando 
 app.use(express.static('public'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-
 
 app.use(session({
     secret: 'pilareslacontrasena',
@@ -33,6 +43,8 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 //rutas en el server
 const user = require('./routes/userRoute');
