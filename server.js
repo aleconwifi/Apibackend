@@ -52,8 +52,11 @@ app.use(passport.session());
 
 //rutas en el server
 const user = require('./routes/userRoute');
+const evento = require('./routes/eventoRoute');
+
 
 app.use('/api', user);
+app.use('/api', evento);
 
 //levantando el servidor
 app.listen(3000, () => {

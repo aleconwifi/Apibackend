@@ -1,4 +1,5 @@
 const passport = require('passport');
+const User = require('../models/user');
 
 exports.createUser = (req, res, next) => {
     //Validacion para algun campo vacio
@@ -47,5 +48,12 @@ exports.loginUser = (req, res, next) => {
         //si es pasa el local-singup es creado el usuario (en passport se crea el usuario y se guarda)
         return res.status(201).json({ message: 'Usuario logeado', user: user });
     })(req, res, next);
+
+}
+
+exports.homePage = async(req, res) => {
+    const result = await User.findOne({ 'email': req.params.email }, { 'password': 0 });
+    //cuando devuelvo el usuario, excluyo la contrasena
+    return res.status(200).json({ user: result });
 
 }
