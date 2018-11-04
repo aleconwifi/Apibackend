@@ -9,18 +9,16 @@ passport.use('local-signup', new LocalStrategy({
     passReqToCallback: true
 }, (req, email, password, done) => {
     User.findOne({ 'email': email }, (err, user) => {
-        //si encuentra un email que ya existe
         if (err) {
             return done(err);
-
         }
+
         if (user) {
-            return done(null, false, 'El email ya existe!!');
+            return done(null, false, 'El email ya se encuentra registrado');
         }
 
-        if (req.body.password.lenght < 5) { //validacion de contrasena
-            return done(null, false, 'La contrasena debe ser mayor a 5 caracteres');
-
+        if (req.body.password.length < 5) {
+            return done(null, false, 'La contraseña debe ser mayor a 5 caracteres');
         }
 
         const newUser = new User();
@@ -30,11 +28,10 @@ passport.use('local-signup', new LocalStrategy({
 
         newUser.save((err) => {
             return done(null, newUser);
-        });
-
+        })
     });
-
 }));
+
 
 //validaciones Login
 passport.use('local-login', new LocalStrategy({
@@ -42,27 +39,26 @@ passport.use('local-login', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, (req, email, password, done) => {
-    User.findOne({ 'email': email }, (err, user) => { //si encuentra un email que ya existe
+
+    User.findOne({ 'email': email }, (err, user) => {
         if (err) {
             return done(err);
-
         }
+        //si no encuentra al usuario
         if (!user) {
             return done(null, false, 'Usuario no encontrado');
         }
 
+        //si la contrasena es menor a 5
         if (password.length < 5) {
-            return done(null, false, 'Contrasena no puede ser menor a 5 caracteres');
-
+            return done(null, false, 'La contrasena es menor a 5 caracteres');
         }
 
-        if (!user.checkPassword(req.body.password)) { //llama al metodo de routes, para chequear la contrasena encriptada
-            return done(null, false, 'Contrasena incorrecta!!!!!!!');
-
+        //llama al metodo de routes, para chequear la contrasena encriptada
+        if (!user.checkPassword(req.body.password)) {
+            return done(null, false, 'Contraseña incorrecta');
         }
 
-        return done(null, user); //si no hay error retorna el usuario logeado que se pasa como parametro
-
+        return done(null, user);
     });
-
 }));
