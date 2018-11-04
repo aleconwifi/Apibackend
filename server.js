@@ -5,10 +5,11 @@ const mongoose = require('mongoose'); //importa el ODM
 const session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 const cors = require('cors'); //darle permisos al que front traiga data
-const passport = require('passport');
+const passport = require('passport'); // hacer que cierta parte de nuestra app solo sea accesible a usuarios registrados
 
 const app = express(); //incializa express
-mongoose.Promise = global.Promise;
+
+
 
 //Conexion a la base de Datos en MLAB3
 //Para ver la base de datos metanse en mi cuenta
@@ -16,10 +17,13 @@ mongoose.Promise = global.Promise;
 //user: alemarcanoo
 //password: pilarcuenca18
 //la base de datos es eventro3
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://ale:abc123@ds133876.mlab.com:33876/eventro3', (err, res) => {
     if (err) throw err;
     console.log('BASE DE DATOS: \x1b[32m%s\x1b[0m', 'ONLINE');
 });
+
+require('./passport/passport-local');
 
 app.use(cors());
 
