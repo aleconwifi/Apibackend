@@ -9,7 +9,21 @@ const eventoSchema = mongoose.Schema({
     categoria: { type: String, default: '' },
     admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     imageId: { type: String, default: '' },
-    imageVersion: { type: String, default: '' }
+    imageVersion: { type: String, default: '' },
+    rating: [{
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        duracion: { type: Number, default: 0 },
+        horario: { type: Number, default: 0 },
+        //aporte: { type: Number, default: 0 },
+        review: { type: String, default: '' },
+        created: { type: Date, default: Date.now }
+    }],
+    totalStars: { type: Number, default: 0 },
+    aporteTotal: [Number],
+    duracionTotal: [Number],
+    horarioTotal: [Number],
+
+
 });
 
 module.exports = mongoose.model('Evento', eventoSchema);
