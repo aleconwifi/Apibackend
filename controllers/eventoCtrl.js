@@ -32,7 +32,8 @@ exports.createEvento = async(req, res) => {
 }
 
 exports.getAllEventos = async(req, res) => {
-    const results = await Evento.find({});
+    const results = await Evento.find({})
+        .populate("rating.user");
 
     return res.status(200).json({ result: results });
 
@@ -61,6 +62,7 @@ exports.addComentario = async(req, res) => {
                 horario: req.body.horario,
                 // aporte: req.body.aporte,
                 review: req.body.review,
+                userTotal: req.body.aporte
             },
             aporteTotal: req.body.aporte,
             duracionTotal: req.body.duracion,
@@ -76,7 +78,6 @@ exports.addComentario = async(req, res) => {
 
 }
 
-//metodo que hace la busqueda en el backend
 exports.search = async(req, res) => {
-    console.log(res)
+    console.log(req.body);
 }

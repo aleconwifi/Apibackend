@@ -16,7 +16,9 @@ const eventoSchema = mongoose.Schema({
         horario: { type: Number, default: 0 },
         //aporte: { type: Number, default: 0 },
         review: { type: String, default: '' },
-        created: { type: Date, default: Date.now }
+        created: { type: Date, default: Date.now },
+        userTotal: { type: Number, default: 0 },
+
     }],
     totalStars: { type: Number, default: 0 },
     aporteTotal: [Number],
