@@ -4,6 +4,7 @@ const EventoCtrl = require('../controllers/eventoCtrl');
 
 
 router.get('/eventos/all', EventoCtrl.getAllEventos);
+router.get('/eventos/mejores', EventoCtrl.mejores);
 
 router.post('/evento/create', EventoCtrl.createEvento);
 router.post('/evento/comentario', EventoCtrl.addComentario);
