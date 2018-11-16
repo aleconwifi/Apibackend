@@ -12,7 +12,7 @@ const app = express(); //incializa express
 
 
 //Conexion a la base de Datos en MLAB3
-//Para ver la base de datos metanse en mi cuenta
+//Para ver la base de datos metanse en la cuenta
 //https://mlab.com/login/
 //user: alemarcanoo
 //password: pilarcuenca18
@@ -50,13 +50,15 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//rutas en el server
+//rutas en el server de las colleciones
 const user = require('./routes/userRoute');
 const evento = require('./routes/eventoRoute');
+const file = require('./routes/fileRoute');
 
 
 app.use('/api', user);
 app.use('/api', evento);
+app.use('/api', file);
 
 //levantando el servidor
 app.listen(3000, () => {

@@ -4,7 +4,13 @@ const bcrypt = require('bcrypt-nodejs'); //encriptar contrasena
 const userSchema = mongoose.Schema({
     fullname: { type: String },
     email: { type: String },
-    password: { type: String }
+    password: { type: String },
+    role: { type: String, default: '' },
+    eventos: [{
+        evento: { type: mongoose.Schema.Types.ObjectId, ref: 'Evento' },
+    }],
+    imageId: { type: String, default: 'defaultPic.png' },
+    imageVersion: { type: String, default: '1542245670' },
 
 });
 

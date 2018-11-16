@@ -9,8 +9,3 @@ router.post('/signup/user', UserCtrl.createUser);
 router.post('/login/user', UserCtrl.loginUser);
 
 module.exports = router;
-
-
-exports.createUser = (req, res, next) => {
-    console.log(req.body)
-}

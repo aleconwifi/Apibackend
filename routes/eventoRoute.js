@@ -9,12 +9,8 @@ router.get('/eventos/mejores', EventoCtrl.mejores);
 router.post('/evento/create', EventoCtrl.createEvento);
 router.post('/evento/comentario', EventoCtrl.addComentario);
 router.post('/search-evento', EventoCtrl.search);
+router.post('/register/asistente', EventoCtrl.addAsistente);
 
 
 
 module.exports = router;
-
-
-exports.createUser = (req, res, next) => {
-    console.log(req.body)
-}

@@ -24,7 +24,18 @@ exports.createEvento = async(req, res) => {
     newEvento.categoria = req.body.categoria;
     newEvento.admin = req.body.userId;
 
-    const evento = await newEvento.save();
+    const eventoData = await newEvento.save();
+
+    await User.update({
+        '_id': req.body.userId
+    }, {
+        $push: {
+            eventos: {
+                evento: eventoData._id
+            }
+        }
+    });
+
 
     return res.status(200).json({ message: 'Evento creado' });
 
@@ -33,7 +44,8 @@ exports.createEvento = async(req, res) => {
 
 exports.getAllEventos = async(req, res) => {
     const results = await Evento.find({})
-        .populate("rating.user");
+        .populate("rating.user")
+        .populate("asistentes.asistente");
 
     return res.status(200).json({ result: results });
 
@@ -76,6 +88,28 @@ exports.addComentario = async(req, res) => {
 
     return res.status(200).json({ message: 'Comentario añadido correctamente' });
 
+}
+
+exports.addAsistente = async(req, res) => {
+    console.log(req.body);
+    await Evento.update({
+        '_id': req.body.evento._id,
+        'asistentes.asistente': { $ne: req.body.user._id }
+    }, {
+        $push: {
+            asistentes: {
+                asistente: req.body.user._id
+            }
+        }
+    });
+
+    await User.update({
+        '_id': req.body.user._id,
+    }, {
+        role: req.body.role
+    });
+
+    return res.status(200).json({ message: 'Asistencia agregada al usuario' });
 }
 
 //metodo de busqueda
