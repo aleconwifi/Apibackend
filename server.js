@@ -6,6 +6,10 @@ const session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 const cors = require('cors'); //darle permisos al que front traiga data
 const passport = require('passport'); // hacer que cierta parte de nuestra app solo sea accesible a usuarios registrados
+const helmet = require('helmet');
+const compression = require('compression');
+
+
 
 const app = express(); //incializa express
 
@@ -24,6 +28,11 @@ mongoose.connect('mongodb://ale:abc123@ds133876.mlab.com:33876/eventro3', (err, 
 });
 
 require('./passport/passport-local');
+
+
+app.use(helmet());
+app.use(compression());
+
 
 app.use(cors());
 

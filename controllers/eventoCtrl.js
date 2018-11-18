@@ -116,9 +116,12 @@ exports.addAsistente = async(req, res) => {
 //regex = expresion regular
 exports.search = async(req, res) => {
     const searchName = req.body.evento;
+    const searchUbicacion = req.body.evento;
+
     const regex = new RegExp(searchName, 'gi');
     const evento = await Evento.find({
-        "nombre": regex
+        "nombre": regex,
+
     });
 
     if (evento.length > 0) {
@@ -129,13 +132,10 @@ exports.search = async(req, res) => {
     }
 }
 
-exports.mejores = async(req, res) => {
 
+exports.leaderBoard = async(req, res) => {
     const results = await Evento.find({})
-        .sort({ "totalStarts": -1 });
+        .sort({ "totalStars": -1 });
 
     return res.status(200).json({ result: results });
-
-
-
 }
