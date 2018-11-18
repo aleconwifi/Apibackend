@@ -6,11 +6,9 @@
     "engine": {
         "node": "10.8.0",
         "npm": "6.4.1"
-
     },
     "scripts": {
         "preinstall": "npm install pm2 && pm2 install pm2-logrotate",
-
         "start": "pm2-runtime server.js -i 0"
     },
     "author": "",

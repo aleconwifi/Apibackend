@@ -25,11 +25,11 @@ const eventoSchema = mongoose.Schema({
     duracionTotal: [Number],
     horarioTotal: [Number],
     asistentes: [{
-        asistente: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    }],
-    categories: [{
-        category: { type: String, default: '' },
-    }],
+            asistente: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        }]
+        /* categories: [{
+             category: { type: String, default: '' },
+         }],*/
 
 
 });

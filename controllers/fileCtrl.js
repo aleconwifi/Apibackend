@@ -3,9 +3,9 @@ const Evento = require('../models/evento');
 const cloudinary = require('cloudinary');
 
 cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET,
+    cloud_name: 'eventro',
+    api_key: '471752658891671',
+    api_secret: '0tKjvT_dand3t97sTl5qax1a0Xk',
 });
 
 //metodo tal
