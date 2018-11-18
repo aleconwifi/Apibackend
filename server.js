@@ -22,7 +22,7 @@ const app = express(); //incializa express
 //password: pilarcuenca18
 //la base de datos es eventro3
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://ale:abc123@ds133876.mlab.com:33876/eventro3', (err, res) => {
+mongoose.connect(process.env.MONGODB, (err, res) => {
     if (err) throw err;
     console.log('BASE DE DATOS: \x1b[32m%s\x1b[0m', 'ONLINE');
 });
@@ -51,7 +51,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(session({
-    secret: 'pilareslacontrasena',
+    secret: process.env.SECRET,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
