@@ -70,6 +70,6 @@ app.use('/api', evento);
 app.use('/api', file);
 
 //levantando el servidor
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Express server puerto 3000: \x1b[45m%s\x1b[0m', 'online');
 });
