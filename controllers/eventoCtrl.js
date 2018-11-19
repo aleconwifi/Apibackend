@@ -118,11 +118,13 @@ exports.addAsistente = async(req, res) => {
 exports.search = async(req, res) => {
     const searchName = req.body.evento;
     const searchUbicacion = req.body.evento;
+    const searchCa = req.body.evento;
 
     const regex = new RegExp(searchName, 'gi');
+    const regex2 = new RegExp(searchCa, 'gi');
     const evento = await Evento.find({
         "nombre": regex,
-        "categoria": regex,
+        "categoria": regex2
 
     });
 
