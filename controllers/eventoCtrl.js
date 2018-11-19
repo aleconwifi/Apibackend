@@ -117,19 +117,30 @@ exports.addAsistente = async(req, res) => {
 //regex = expresion regular
 exports.search = async(req, res) => {
     const searchName = req.body.evento;
-    const searchUbicacion = req.body.evento;
-    const searchCa = req.body.evento;
+    const searchCa = req.body.evento2;
 
     const regex = new RegExp(searchName, 'gi');
     const regex2 = new RegExp(searchCa, 'gi');
     const evento = await Evento.find({
         "nombre": regex,
-        "categoria": regex2
+
+    });
+    const evento2 = await Evento.find({
+        "categoria": regex2,
 
     });
 
+
     if (evento.length > 0) {
         return res.status(200).json({ message: "Resultados encontrados", results: evento });
+    } else {
+        return res.status(200).json({ message: "Resultados encontrados", results: [] });
+
+    }
+
+
+    if (evento2.length > 0) {
+        return res.status(200).json({ message: "Resultados encontrados", results: evento2 });
     } else {
         return res.status(200).json({ message: "Resultados encontrados", results: [] });
 
