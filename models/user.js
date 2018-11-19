@@ -9,6 +9,9 @@ const userSchema = mongoose.Schema({
     eventos: [{
         evento: { type: mongoose.Schema.Types.ObjectId, ref: 'Evento' },
     }],
+    asistires: [{
+        asistire: { type: mongoose.Schema.Types.ObjectId, ref: 'Evento' },
+    }],
     imageId: { type: String, default: 'defaultPic.png' },
     imageVersion: { type: String, default: '1542245670' },
 

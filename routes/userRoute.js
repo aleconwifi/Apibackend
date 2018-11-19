@@ -7,5 +7,7 @@ router.get('/home/:email', UserCtrl.homePage);
 
 router.post('/signup/user', UserCtrl.createUser);
 router.post('/login/user', UserCtrl.loginUser);
+router.post('/register/asistire', UserCtrl.addAsistire);
+
 
 module.exports = router;
