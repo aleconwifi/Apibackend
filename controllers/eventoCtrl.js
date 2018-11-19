@@ -140,9 +140,9 @@ exports.search = async(req, res) => {
 
 
     if (evento2.length > 0) {
-        return res.status(200).json({ message: "Resultados encontrados", results: evento2 });
+        return res.status(200).json({ message: "Resultados encontrados", results2: evento2 });
     } else {
-        return res.status(200).json({ message: "Resultados encontrados", results: [] });
+        return res.status(200).json({ message: "Resultados encontrados", results2: [] });
 
     }
 }
