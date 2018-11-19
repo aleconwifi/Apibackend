@@ -122,6 +122,7 @@ exports.search = async(req, res) => {
     const regex = new RegExp(searchName, 'gi');
     const evento = await Evento.find({
         "nombre": regex,
+        "categoria": regex,
 
     });
 
