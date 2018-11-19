@@ -45,6 +45,7 @@ exports.createEvento = async(req, res) => {
 exports.getAllEventos = async(req, res) => {
     const results = await Evento.find({})
         .populate("rating.user")
+        .populate("admin")
         .populate("asistentes.asistente");
 
     return res.status(200).json({ result: results });
