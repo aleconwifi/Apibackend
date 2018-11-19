@@ -117,16 +117,10 @@ exports.addAsistente = async(req, res) => {
 //regex = expresion regular
 exports.search = async(req, res) => {
     const searchName = req.body.evento;
-    const searchCa = req.body.evento2;
 
     const regex = new RegExp(searchName, 'gi');
-    const regex2 = new RegExp(searchCa, 'gi');
     const evento = await Evento.find({
         "nombre": regex,
-
-    });
-    const evento2 = await Evento.find({
-        "categoria": regex2,
 
     });
 
@@ -139,14 +133,29 @@ exports.search = async(req, res) => {
     }
 
 
-    if (evento2.length > 0) {
-        return res.status(200).json({ message: "Resultados encontrados", results2: evento2 });
-    } else {
-        return res.status(200).json({ message: "Resultados encontrados", results2: [] });
 
-    }
 }
 
+exports.search2 = async(req, res) => {
+    const searchName = req.body.evento;
+
+    const regex = new RegExp(searchName, 'gi');
+    const evento = await Evento.find({
+        "categoria": regex,
+
+    });
+
+
+    if (evento.length > 0) {
+        return res.status(200).json({ message: "Resultados encontrados", results: evento });
+    } else {
+        return res.status(200).json({ message: "Resultados encontrados", results: [] });
+
+    }
+
+
+
+}
 
 exports.leaderBoard = async(req, res) => {
     const results = await Evento.find({})
