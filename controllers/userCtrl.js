@@ -56,7 +56,8 @@ exports.loginUser = (req, res, next) => {
 exports.homePage = async(req, res) => {
     const result = await User.findOne({ 'email': req.params.email }, { 'password': 0 })
         .populate("eventos.evento")
-        .populate("asistires.asistire");
+        .populate("asistires.asistire")
+        .populate("asistentes.asistente");
 
     return res.status(200).json({ user: result });
 }
