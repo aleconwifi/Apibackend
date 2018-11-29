@@ -157,6 +157,26 @@ exports.search2 = async(req, res) => {
 
 }
 
+exports.search3 = async(req, res) => {
+    const searchName = req.body.evento;
+
+    const regex = new RegExp(searchName, 'gi');
+    const evento = await Evento.find({
+        "fecha": regex,
+
+    });
+
+
+    if (evento.length > 0) {
+        return res.status(200).json({ message: "Resultados encontrados", results: evento });
+    } else {
+        return res.status(200).json({ message: "Resultados encontrados", results: [] });
+
+    }
+
+
+
+}
 exports.leaderBoard = async(req, res) => {
     const results = await Evento.find({})
         .sort({ "totalStars": -1 });
